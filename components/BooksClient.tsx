@@ -9,11 +9,15 @@ import { Book, Author } from '@/lib/data';
 interface BooksClientProps {
   initialBooks: Book[];
   authors: Author[];
+  selectedGenre: string;
 }
 
-export default function BooksClient({ initialBooks, authors }: BooksClientProps) {
+export default function BooksClient({
+  initialBooks,
+  authors,
+  selectedGenre,
+}: BooksClientProps) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedGenre, setSelectedGenre] = useState<string>('all');
 
   // Get unique genres
   const genres = useMemo(() => {
@@ -46,9 +50,9 @@ export default function BooksClient({ initialBooks, authors }: BooksClientProps)
       <div className="mb-8">
         <div className="flex flex-wrap gap-2">
           {genres.map((genre) => (
-            <button
+            <Link
               key={genre}
-              onClick={() => setSelectedGenre(genre)}
+              href={genre === 'all' ? '/books' : `/books?genre=${encodeURIComponent(genre)}`}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                 selectedGenre === genre
                   ? 'bg-zinc-900 dark:bg-zinc-50 text-white dark:text-zinc-900'
@@ -56,7 +60,7 @@ export default function BooksClient({ initialBooks, authors }: BooksClientProps)
               }`}
             >
               {genre === 'all' ? 'All Genres' : genre}
-            </button>
+            </Link>
           ))}
         </div>
       </div>
