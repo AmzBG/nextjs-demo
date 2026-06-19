@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import AuthNavAction from './AuthNavAction';
 
 export default function Navigation() {
   return (
@@ -35,6 +36,7 @@ export default function Navigation() {
             >
               Publishers
             </Link>
+            <AuthNavAction />
           </div>
         </div>
       </div>
