@@ -10,10 +10,20 @@ export interface Author {
   imageUrl: string;
 }
 
+export interface Publisher {
+  id: number;
+  name: string;
+  country: string;
+  foundedYear: number;
+  website: string;
+  description: string;
+}
+
 export interface Book {
   id: number;
   title: string;
   authorId: number;
+  publisherId: number;
   publishedYear: number;
   genre: string;
   description: string;
@@ -70,11 +80,60 @@ export const authors: Author[] = [
   },
 ];
 
+export const publishers: Publisher[] = [
+  {
+    id: 1,
+    name: "Penguin Classics",
+    country: "United Kingdom",
+    foundedYear: 1946,
+    website: "https://www.penguin.co.uk",
+    description:
+      "Penguin Classics publishes accessible editions of enduring works from across world literature.",
+  },
+  {
+    id: 2,
+    name: "Secker & Warburg",
+    country: "United Kingdom",
+    foundedYear: 1935,
+    website: "https://www.penguin.co.uk",
+    description:
+      "Secker & Warburg became known for publishing influential twentieth-century fiction and political writing.",
+  },
+  {
+    id: 3,
+    name: "Collins Crime Club",
+    country: "United Kingdom",
+    foundedYear: 1930,
+    website: "https://harpercollins.co.uk",
+    description:
+      "Collins Crime Club specialized in detective fiction and helped define classic mystery publishing.",
+  },
+  {
+    id: 4,
+    name: "Charles Scribner's Sons",
+    country: "United States",
+    foundedYear: 1846,
+    website: "https://www.simonandschuster.com",
+    description:
+      "Charles Scribner's Sons is associated with major American literary fiction from the nineteenth and twentieth centuries.",
+  },
+  {
+    id: 5,
+    name: "Hogarth Press",
+    country: "United Kingdom",
+    foundedYear: 1917,
+    website: "https://www.penguinrandomhouse.com",
+    description:
+      "Hogarth Press published modernist literature and became closely connected with experimental fiction.",
+  },
+];
+
 export const books: Book[] = [
   {
     id: 1,
     title: "Pride and Prejudice",
     authorId: 1,
+    publisherId: 1,
     publishedYear: 1813,
     genre: "Romance",
     description:
@@ -88,6 +147,7 @@ export const books: Book[] = [
     id: 2,
     title: "Emma",
     authorId: 1,
+    publisherId: 1,
     publishedYear: 1815,
     genre: "Romance",
     description:
@@ -101,6 +161,7 @@ export const books: Book[] = [
     id: 3,
     title: "1984",
     authorId: 2,
+    publisherId: 2,
     publishedYear: 1949,
     genre: "Dystopian Fiction",
     description:
@@ -114,6 +175,7 @@ export const books: Book[] = [
     id: 4,
     title: "Animal Farm",
     authorId: 2,
+    publisherId: 2,
     publishedYear: 1945,
     genre: "Political Satire",
     description:
@@ -127,6 +189,7 @@ export const books: Book[] = [
     id: 5,
     title: "Murder on the Orient Express",
     authorId: 3,
+    publisherId: 3,
     publishedYear: 1934,
     genre: "Mystery",
     description:
@@ -140,6 +203,7 @@ export const books: Book[] = [
     id: 6,
     title: "And Then There Were None",
     authorId: 3,
+    publisherId: 3,
     publishedYear: 1939,
     genre: "Mystery",
     description:
@@ -153,6 +217,7 @@ export const books: Book[] = [
     id: 7,
     title: "The Old Man and the Sea",
     authorId: 4,
+    publisherId: 4,
     publishedYear: 1952,
     genre: "Literary Fiction",
     description:
@@ -166,6 +231,7 @@ export const books: Book[] = [
     id: 8,
     title: "A Farewell to Arms",
     authorId: 4,
+    publisherId: 4,
     publishedYear: 1929,
     genre: "War Novel",
     description:
@@ -179,6 +245,7 @@ export const books: Book[] = [
     id: 9,
     title: "Mrs Dalloway",
     authorId: 5,
+    publisherId: 5,
     publishedYear: 1925,
     genre: "Modernist Literature",
     description:
@@ -192,6 +259,7 @@ export const books: Book[] = [
     id: 10,
     title: "To the Lighthouse",
     authorId: 5,
+    publisherId: 5,
     publishedYear: 1927,
     genre: "Modernist Literature",
     description:
@@ -212,8 +280,16 @@ export function getBookById(id: number): Book | undefined {
   return books.find((book) => book.id === id);
 }
 
+export function getPublisherById(id: number): Publisher | undefined {
+  return publishers.find((publisher) => publisher.id === id);
+}
+
 export function getBooksByAuthorId(authorId: number): Book[] {
   return books.filter((book) => book.authorId === authorId);
+}
+
+export function getBooksByPublisherId(publisherId: number): Book[] {
+  return books.filter((book) => book.publisherId === publisherId);
 }
 
 export function getAllAuthors(): Author[] {
@@ -222,4 +298,8 @@ export function getAllAuthors(): Author[] {
 
 export function getAllBooks(): Book[] {
   return books;
+}
+
+export function getAllPublishers(): Publisher[] {
+  return publishers;
 }
